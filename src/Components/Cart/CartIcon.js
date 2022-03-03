@@ -1,3 +1,5 @@
+//Filed that provide cart icons to the cart-button
+
 const CartIcon = () => {
     return (
       <svg
