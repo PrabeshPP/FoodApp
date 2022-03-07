@@ -6,9 +6,7 @@ import CartIcon from "../Cart/CartIcon";
 
 const HeaderCartButton=(props)=>{
     const ctxValue=useContext(CartContext);
-    const numberOfItems=ctxValue.items.reduce((currentNumber,item)=>{
-        return currentNumber+item.amount;
-    },0)
+    const numberOfItems=0;
     
     return (
         <button className={classes.button} onClick={props.onClick}>
