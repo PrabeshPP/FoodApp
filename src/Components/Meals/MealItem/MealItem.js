@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import classes from './MealItem.module.css';
 import MealItemForm from './MealItemForm';
-import { useContext } from 'react';
 import CartContext from '../../../store/cart-context';
 
 const MealItem=(props)=>{
@@ -12,6 +12,7 @@ const MealItem=(props)=>{
             amount:amount,
             price:props.price
         })
+        
     }
     return(
         <li className={classes.meal}>

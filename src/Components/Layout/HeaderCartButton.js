@@ -6,7 +6,13 @@ import CartIcon from "../Cart/CartIcon";
 
 const HeaderCartButton=(props)=>{
     const ctxValue=useContext(CartContext);
-    const numberOfItems=0;
+    const numberofCartItems=ctxValue.items.reduce((currElem,item)=>{
+        currElem=+currElem;
+        let value=+item.amount;
+        
+        return currElem+value;
+    },0);
+   
     
     return (
         <button className={classes.button} onClick={props.onClick}>
@@ -16,7 +22,7 @@ const HeaderCartButton=(props)=>{
          </span>
       
          <span>Basket</span>
-         <span className={classes.badge}>{numberOfItems}</span>
+         <span className={classes.badge}>{numberofCartItems}</span>
 
         </button>
        
