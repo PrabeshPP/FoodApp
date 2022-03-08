@@ -32,13 +32,32 @@ const defaultCartState = {
        
 
       }
-      
-      
-    
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount
       };
+     
+    }
+    if(action.type==="REMOVE"){
+      const existingCartItemIndex=state.items.findIndex((item)=>item.id==action.id);
+      const existingItem=state.items[existingCartItemIndex];
+      const updatedTotalAmount=state.totalAmount-existingItem.price;
+      let upDatedItems;
+
+      if(existingItem.amount==1){
+        upDatedItems=state.items.filter(item=>item.id!=action.id);
+      }else{
+        const updatedItem={...existingItem,amount:existingItem.amount-1};
+        upDatedItems=[...state.items];
+        upDatedItems[existingCartItemIndex]=updatedItem;
+      }
+
+      return {
+        items:upDatedItems,
+        totalAmount:updatedTotalAmount
+        
+      }
+        
     }
     return defaultCartState;
   };
