@@ -11,10 +11,12 @@ const Cart=(props)=>{
 
 
     const cartItemRemoveHandler=(id)=>{
+        cartCtx.removeItem(id);
 
     }
 
     const cartItemAddHandler=(item)=>{
+        cartCtx.addItem({...item,amount:1});
 
 
     }
@@ -24,8 +26,8 @@ const Cart=(props)=>{
         name={item.name}
         price={item.price}
         amount={item.amount} 
-        onAdd={cartItemAddHandler.bind(null,item.id)}
-        onRemove={cartItemRemoveHandler.bind(null,item)}
+        onAdd={cartItemAddHandler.bind(null,item)}
+        onRemove={cartItemRemoveHandler.bind(null,item.id)}
         />)}
     </ul>);
     return <Modal onDismiss={props.onDismiss}>
