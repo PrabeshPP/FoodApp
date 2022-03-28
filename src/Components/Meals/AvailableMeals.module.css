@@ -22,3 +22,9 @@
       transform: translateY(0);
     }
   }
+
+  .mealsLoading{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }

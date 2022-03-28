@@ -5,14 +5,21 @@ import {useEffect,useState} from "react";
 
 
 
-let DUMMY_MEALS=[];
+
 const AvailableMeals=()=>{
   const [meals,setMeals]=useState([])
+  const [isLoading,setIsLoading]=useState(false);
+  const[hasError,setHasError]=useState("");
   
 
   useEffect(()=>{
     const fetchMeals=async()=>{
-      const response=await fetch("https://foodapp-c413b-default-rtdb.firebaseio.com/meals.json")
+      setIsLoading(true);
+      try{
+        const response=await fetch("https://foodapp-c413b-default-rtdb.firebaseio.com/meals.json")
+        if(response.status!=200){
+          throw new Error("retry again!!!")
+        }
       const data=await response.json();
       const loadedMeals=[];
       for(const key in data){
@@ -27,12 +34,32 @@ const AvailableMeals=()=>{
       }
 
       setMeals(loadedMeals);
+      setIsLoading(false);
 
+      }catch (err){
+        setIsLoading(false);
+        setHasError(err);
+
+      }
     }
     fetchMeals();
         
 
   },[])
+
+  if(isLoading && !hasError){
+    return <section className={classes.mealsLoading}>
+      <p>Loading...</p>
+    </section>
+
+  }
+
+  if(hasError){
+    return <section className={classes.mealsLoading}>
+      <p>retry again!!!</p>
+    </section>
+
+  }
 
   
 
@@ -45,6 +72,7 @@ const AvailableMeals=()=>{
   name={item.name}
   description={item.description}
   price={item.price}  />);
+
   return(
     <section className={classes.meals}>
     <Card>
