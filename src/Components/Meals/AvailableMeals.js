@@ -38,7 +38,7 @@ const AvailableMeals=()=>{
 
       }catch (err){
         setIsLoading(false);
-        setHasError(err);
+        setHasError(err.message);
 
       }
     }
@@ -55,8 +55,8 @@ const AvailableMeals=()=>{
   }
 
   if(hasError){
-    return <section className={classes.mealsLoading}>
-      <p>retry again!!!</p>
+    return <section className={classes.mealsErr}>
+      <p>{hasError}</p>
     </section>
 
   }
