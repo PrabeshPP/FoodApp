@@ -10,6 +10,8 @@ const Cart=(props)=>{
     const cartCtx=useContext(CartContext);
     const totalAmount=(`$${(cartCtx.totalAmount).toFixed(2)}`)
     const [ordered,setOrdered]=useState(false);
+    const [isSubmitting,setIsSubmitting]=useState(false);
+    const [didSumbit,setDidSubmit]=useState(false);
 
 
     const cartItemRemoveHandler=(id)=>{
@@ -37,8 +39,9 @@ const Cart=(props)=>{
         />)}
     </ul>);
 
-    const submitOrderHandler=(userData)=>{
-        fetch("https://foodapp-c413b-default-rtdb.firebaseio.com/orders.json",{
+    const submitOrderHandler=async(userData)=>{
+        setIsSubmitting(true);
+        await fetch("https://foodapp-c413b-default-rtdb.firebaseio.com/orders.json",{
             method:"POST",
             body:JSON.stringify(
                 {
@@ -49,6 +52,8 @@ const Cart=(props)=>{
             )
 
         });
+
+        setIsSubmitting(false);
 
     }
 
